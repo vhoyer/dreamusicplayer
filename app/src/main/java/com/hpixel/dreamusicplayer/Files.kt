@@ -7,7 +7,7 @@ import android.provider.MediaStore
 
 class Files {
 
-    fun getSongs(parent: Context): ArrayList<String>{
+    fun getSongs(parent: Context, separator : String): ArrayList<String>{
 		//Retrieve a list of Music files currently listed in the Media store DB via URI.
 
 		//Some audio may be explicitly marked as not being music
@@ -32,11 +32,11 @@ class Files {
 		val songs = ArrayList<String>()
 		while (cursor.moveToNext()) {
 			songs.add(
-					cursor.getString(0) + "||" +
-					cursor.getString(1) + "||" +
-					cursor.getString(2) + "||" +
-					cursor.getString(3) + "||" +
-					cursor.getString(4) + "||" +
+					cursor.getString(0) + separator +
+					cursor.getString(1) + separator +
+					cursor.getString(2) + separator +
+					cursor.getString(3) + separator +
+					cursor.getString(4) + separator +
 					cursor.getString(5)
 			)
 		}

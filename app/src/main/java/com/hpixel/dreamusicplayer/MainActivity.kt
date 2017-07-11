@@ -10,8 +10,12 @@ class MainActivity : AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 
-        val label = findViewById(R.id.label) as TextView
-        val files = Files()
-        label.text = files.getSongs(this.applicationContext)[0]
+		val files = Files()
+		val separator = "||"
+		val songArray = files.getSongs(this.applicationContext, separator)
+		val song = Song(songArray[0], separator)
+
+		val label = findViewById(R.id.label) as TextView
+		label.text = song.title + "\n" + song.duration.toString() + " = " + song.getHDuration()
 	}
 }
