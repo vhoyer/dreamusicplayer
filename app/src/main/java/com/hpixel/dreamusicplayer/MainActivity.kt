@@ -16,6 +16,6 @@ class MainActivity : AppCompatActivity() {
 		val song = Song(songArray[0], separator)
 
 		val label = findViewById(R.id.label) as TextView
-		label.text = song.title + "\n" + song.duration.toString() + " = " + song.getHDuration()
+		label.text = "${song.title}\n${song.duration} = ${song.getHDuration()}"
 	}
 }
