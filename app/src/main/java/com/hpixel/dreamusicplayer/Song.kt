@@ -22,7 +22,7 @@ data class Song(
 		duration = data[5].toInt()
 	}
 
-	//get Human Duration
+	//get Human Format Duration
 	fun getHDuration() : String {
 		val min = duration / 60000
 		val sec = duration % 60000 / 1000
