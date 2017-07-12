@@ -1,4 +1,4 @@
-package com.hpixel.dreamusicplayer
+package com.hpixel.dreamusicplayer.controller
 
 /**
 * Created by vhoyer on 11/07/17.
@@ -6,6 +6,7 @@ package com.hpixel.dreamusicplayer
 data class Song(
 		var songID : Int = 0,
 		var artist : String = "unknown",
+        var albumName : String = TODO("get song album name"),
 		var title : String = "no title",
 		var filePath : String = "/",
 		var displayName : String = "no display",

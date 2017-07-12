@@ -1,4 +1,4 @@
-package com.hpixel.dreamusicplayer
+package com.hpixel.dreamusicplayer.controller
 
 import android.content.Context
 import android.provider.MediaStore
