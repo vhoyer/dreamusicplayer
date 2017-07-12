@@ -24,8 +24,8 @@ data class Song(
 
 	//get Human Duration
 	fun getHDuration() : String {
-		val min = (duration / 60000).toString()
-		val sec = (duration % 60000 / 1000).toString()
+		val min = duration / 60000
+		val sec = duration % 60000 / 1000
 		return  "$min:$sec"
 	}
 }
