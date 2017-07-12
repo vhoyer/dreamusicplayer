@@ -8,7 +8,7 @@
               android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/songListItem_rankitem_date"
+        android:id="@+id/songListItem_duration"
         android:text="000:00"
         android:layout_marginTop="2dp"
         android:layout_gravity="right"
