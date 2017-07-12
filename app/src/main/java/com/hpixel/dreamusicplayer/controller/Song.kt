@@ -1,18 +1,30 @@
 package com.hpixel.dreamusicplayer.controller
 
+import android.provider.MediaStore
+
 /**
 * Created by vhoyer on 11/07/17.
 */
 data class Song(
 		var songID : Int = 0,
 		var artist : String = "unknown",
-        var albumName : String = TODO("get song album name"),
+        var albumName : String = "unknown album",
 		var title : String = "no title",
 		var filePath : String = "/",
 		var displayName : String = "no display",
 		var duration : Int = 0
 )
 {
+    val query : Array<String> = arrayOf(
+            MediaStore.Audio.Media._ID,
+            MediaStore.Audio.Media.ARTIST,
+            MediaStore.Audio.Media.TITLE,
+            MediaStore.Audio.Media.DATA,
+            MediaStore.Audio.Media.DISPLAY_NAME,
+            MediaStore.Audio.Media.DURATION,
+            MediaStore.Audio.Media.ALBUM
+    )
+
 	constructor(string : String, separator : String): this(){
 		val data = string.split(separator)
 		songID = data[0].toInt()
@@ -21,12 +33,13 @@ data class Song(
 		filePath = data[3]
 		displayName = data[4]
 		duration = data[5].toInt()
+        albumName = data[6]
 	}
 
 	//get Human Format Duration
 	fun getHDuration() : String {
 		val min = duration / 60000
-		val sec = duration % 60000 / 1000
+		val sec = "${duration % 60000 / 1000}".format("%02d")
 		return  "$min:$sec"
 	}
 }
