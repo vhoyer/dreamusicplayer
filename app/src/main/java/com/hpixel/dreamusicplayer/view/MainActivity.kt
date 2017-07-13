@@ -1,8 +1,9 @@
-package com.hpixel.dreamusicplayer
+package com.hpixel.dreamusicplayer.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.ListView
+import com.hpixel.dreamusicplayer.R
 import com.hpixel.dreamusicplayer.controller.SongListProvider
 import com.hpixel.dreamusicplayer.controller.SongsArrayAdaptor
 
