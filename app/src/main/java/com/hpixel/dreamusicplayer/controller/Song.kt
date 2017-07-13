@@ -15,15 +15,17 @@ data class Song(
 		var duration : Int = 0
 )
 {
-    val query : Array<String> = arrayOf(
-            MediaStore.Audio.Media._ID,
-            MediaStore.Audio.Media.ARTIST,
-            MediaStore.Audio.Media.TITLE,
-            MediaStore.Audio.Media.DATA,
-            MediaStore.Audio.Media.DISPLAY_NAME,
-            MediaStore.Audio.Media.DURATION,
-            MediaStore.Audio.Media.ALBUM
-    )
+    companion object {
+        val query: Array<String> = arrayOf(
+                MediaStore.Audio.Media._ID,
+                MediaStore.Audio.Media.ARTIST,
+                MediaStore.Audio.Media.TITLE,
+                MediaStore.Audio.Media.DATA,
+                MediaStore.Audio.Media.DISPLAY_NAME,
+                MediaStore.Audio.Media.DURATION,
+                MediaStore.Audio.Media.ALBUM
+        )
+    }
 
 	constructor(string : String, separator : String): this(){
 		val data = string.split(separator)
