@@ -16,7 +16,7 @@ data class Song(
 )
 {
     companion object {
-        val query: Array<String> = arrayOf(
+        val QUERY: Array<String> = arrayOf(
                 MediaStore.Audio.Media._ID,
                 MediaStore.Audio.Media.ARTIST,
                 MediaStore.Audio.Media.TITLE,
