@@ -1,37 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/songListItem_songTitle"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="24sp"
-        android:layout_marginTop="2dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:text="@string/app_name"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        android:textColor="@color/songList_title"/>
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/songListItem_artistName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:text="@string/app_name"
-        android:textColor="@color/songList_detail"/>
+        <TextView
+            android:id="@+id/songListItem_songTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:text="@string/app_name"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            android:textColor="@color/songList_title"/>
 
-    <TextView
-        android:id="@+id/songListItem_albumName"
-        android:text="@string/app_name"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="4dp"
-        android:layout_width="wrap_content"
-        android:layout_height="18sp"
-        android:textColor="@color/songList_detail"/>
+        <TextView
+            android:id="@+id/songListItem_artistName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:text="@string/app_name"
+            android:textColor="@color/songList_detail"/>
+
+        <TextView
+            android:id="@+id/songListItem_albumName"
+            android:text="@string/app_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="4dp"
+            android:textColor="@color/songList_detail"/>
+
+    </LinearLayout>
 
 </LinearLayout>
