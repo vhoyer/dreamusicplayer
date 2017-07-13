@@ -3,8 +3,8 @@ package com.hpixel.dreamusicplayer
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.ListView
-import com.hpixel.dreamusicplayer.controller.Files
-import com.hpixel.dreamusicplayer.controller.Song
+import com.hpixel.dreamusicplayer.model.Files
+import com.hpixel.dreamusicplayer.model.Song
 import com.hpixel.dreamusicplayer.controller.SongsArrayAdaptor
 
 class MainActivity : AppCompatActivity() {
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         songList.sortBy { song -> song.title }
 
         //due to a possible "floating action button" that may be added later
-        val anEmptySpaceInTheEnd = Song(0,"","","","","",0)
+        val anEmptySpaceInTheEnd = Song(0, "", "", "", "", "", 0)
         songList.add(anEmptySpaceInTheEnd)
 
         return songList
