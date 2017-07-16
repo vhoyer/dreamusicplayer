@@ -7,10 +7,10 @@ import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
 import android.support.v7.app.AppCompatActivity
+import android.widget.ImageView
 import android.widget.TextView
 import com.hpixel.dreamusicplayer.R
 import com.hpixel.dreamusicplayer.controller.MediaPlayerService
-import com.hpixel.dreamusicplayer.controller.SongListProvider
 import com.hpixel.dreamusicplayer.model.Current
 
 
@@ -23,19 +23,27 @@ class PlayerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_player)
 
         val context = this.applicationContext
-        val songProvider = SongListProvider(context)
 
         val songToPlay = Current.song
+        val playingAlbum = Current.album
+
+        val title = songToPlay.title
+        val artist = songToPlay.artist
+        val album = songToPlay.albumName
+        val artwork = playingAlbum.getArtwork(context)
 
         val txtTitle = findViewById(R.id.player_title) as TextView
         val txtArtist = findViewById(R.id.player_artist) as TextView
         val txtAlbum = findViewById(R.id.player_album) as TextView
+        val imgCover = findViewById(R.id.player_cover) as ImageView
 
-        txtTitle.text = songToPlay.title
-        txtArtist.text = songToPlay.artist
-        txtAlbum.text = songToPlay.albumName
+        txtTitle.text = title
+        txtArtist.text = artist
+        txtAlbum.text = album
+        imgCover.setImageDrawable(artwork)
 
         val playerService = Intent(context, MediaPlayerService::class.java)
+
         startService(playerService)
         bindService(playerService, serviceConnection, Context.BIND_ABOVE_CLIENT)
     }

@@ -6,13 +6,14 @@ import android.provider.MediaStore
 * Created by vhoyer on 11/07/17.
 */
 data class Song(
-		var songID : Int = 0,
-		var artist : String = "unknown",
+        var songID : Int = 0,
+        var artist : String = "unknown",
         var albumName : String = "unknown album",
-		var title : String = "no title",
-		var filePath : String = "/",
-		var displayName : String = "no display",
-		var duration : Int = 0
+        var title : String = "no title",
+        var filePath : String = "/",
+        var displayName : String = "no display",
+        var duration : Int = 0,
+        var albumID : Int = 0
 )
 {
     companion object {
@@ -23,7 +24,8 @@ data class Song(
                 MediaStore.Audio.Media.DATA,
                 MediaStore.Audio.Media.DISPLAY_NAME,
                 MediaStore.Audio.Media.DURATION,
-                MediaStore.Audio.Media.ALBUM
+                MediaStore.Audio.Media.ALBUM,
+                MediaStore.Audio.Media.ALBUM_ID
         )
     }
 
@@ -36,6 +38,7 @@ data class Song(
 		displayName = data[4]
 		duration = data[5].toInt()
         albumName = data[6]
+        albumID = data[7].toInt()
 	}
 
 	//get Human Format Duration

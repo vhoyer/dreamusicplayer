@@ -8,6 +8,12 @@
     android:layout_margin="10dp"
     tools:context="com.hpixel.dreamusicplayer.view.PlayerActivity">
 
+    <ImageView
+        android:id="@+id/player_cover"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="@dimen/playerCover"
+        android:layout_height="@dimen/playerCover"/>
+
     <TextView
         android:id="@+id/player_title"
         android:layout_width="match_parent"

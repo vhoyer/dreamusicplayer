@@ -1,8 +1,8 @@
 package com.hpixel.dreamusicplayer.model
 
 import android.content.Context
+import android.database.Cursor
 import android.provider.MediaStore
-
 
 
 class Files {
@@ -22,15 +22,37 @@ class Files {
                 sortOrder
 		)
 
-		val songs = ArrayList<String>()
-		while (cursor.moveToNext()) {
-            var songString = cursor.getString(0)
-            for (i in 1..cursor.columnCount-1){
-                songString += separator + cursor.getString(i)
-            }
-			songs.add(songString)
-		}
-
-		return songs
+        return cursorIter(cursor, separator)
 	}
+
+    fun getAlbumnInfo(parent: Context, separator: String) : ArrayList<String> {
+        val query = arrayOf(
+                MediaStore.Audio.Albums._ID,
+                MediaStore.Audio.Albums.ALBUM_ART
+        )
+
+        val cursor = parent.getContentResolver().query(
+                MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
+                query,
+                null,null,null
+        )
+
+        return cursorIter(cursor, separator)
+    }
+
+    private fun cursorIter (cursor : Cursor, separator: String): ArrayList<String> {
+        val list = ArrayList<String>()
+
+        while (cursor.moveToNext()) {
+            var string = cursor.getString(0)
+
+            for (i in 1..cursor.columnCount-1){
+                string += separator + cursor.getString(i)
+            }
+
+            list.add(string)
+        }
+
+        return list
+    }
 }

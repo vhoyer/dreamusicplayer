@@ -5,9 +5,29 @@ package com.hpixel.dreamusicplayer.model
  */
 class Current {
     companion object {
+        var albumsInfo: ArrayList<Album> = ArrayList<Album>()
         var playlist: ArrayList<Song> = ArrayList<Song>()
         var arrayPosition : Int = 0
 
-        var song : Song = Song()
+        private var currentAlbum : Album = Album()
+        val album : Album
+            get() = currentAlbum
+
+        private var currentSong : Song = Song()
+        val song : Song
+            get() = currentSong
+
+        fun changeSong(song: Song){
+            currentSong = song
+            val albumFound = albumsInfo.find {
+                album -> album.id == song.albumID
+            }
+
+            if (albumFound == null) {
+                currentAlbum = Album()
+                return
+            }
+            currentAlbum = albumFound
+        }
     }
 }

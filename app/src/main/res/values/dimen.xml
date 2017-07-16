@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="listCover">55dp</dimen> <!-- I want to add, but I need to solve memory allocation problems-->
+    <dimen name="playerCover">300dp</dimen>
+</resources>
