@@ -12,12 +12,14 @@ class Files {
 
 		//Some audio may be explicitly marked as not being music
 		val selection = MediaStore.Audio.Media.IS_MUSIC + " != 0"
+        val sortOrder = MediaStore.Audio.Media.TITLE + " ASC"
 
 		val cursor = parent.getContentResolver().query(
 				MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 songQuery,
 				selection,
-				null, null
+				null,
+                sortOrder
 		)
 
 		val songs = ArrayList<String>()

@@ -10,6 +10,7 @@ import android.widget.TextView
 import com.hpixel.dreamusicplayer.R
 import com.hpixel.dreamusicplayer.model.Song
 
+
 /**
 * Created by vhoyer on 12/07/17.
 */
