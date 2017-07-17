@@ -34,10 +34,6 @@ class ListProvider(val context: Context) {
 
         songList = songList.filter(withCondition) as ArrayList<Song>
 
-        //due to a possible "floating action button" that may be added later
-        val anEmptySpaceInTheEnd = Song(0, "", "", "", "", "", 0)
-        songList.add(anEmptySpaceInTheEnd)
-
         return songList
     }
 
