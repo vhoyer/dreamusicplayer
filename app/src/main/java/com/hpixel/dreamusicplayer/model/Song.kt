@@ -29,6 +29,18 @@ data class Song(
         )
     }
 
+    val album : Album
+        get() {
+            val albumFound = Current.albumsInfo.find {
+                album -> album.id == this.albumID
+            }
+
+            if (albumFound == null) {
+                return Album()
+            }
+            return albumFound
+        }
+
 	constructor(string : String, separator : String): this(){
 		val data = string.split(separator)
 		songID = data[0].toInt()

@@ -11,7 +11,7 @@ import com.hpixel.dreamusicplayer.model.Song
 class ListProvider(val context: Context) {
     companion object {
         val ALL_AUDIO_FILES
-            get() = { song : Song -> true}
+            get() = { _ : Song -> true}
         val WHATSAPP_AUDIO_FILTER
             get() = { song : Song -> !Regex("WhatsApp Audio").containsMatchIn (song.albumName) }
     }
@@ -58,6 +58,4 @@ class ListProvider(val context: Context) {
 
         return albumList
     }
-
-    fun getSong(byId : Int) : Song = songList { song -> song.songID == byId }[0]
 }
