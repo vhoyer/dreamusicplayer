@@ -16,13 +16,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service android:name=".controller.MediaPlayerService"/>
-        <activity android:name=".view.MainActivity">
+
+        <activity
+            android:name=".view.splashActivity"
+            android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".view.MainActivity">
+        </activity>
+
         <activity android:name=".view.PlayerActivity">
         </activity>
     </application>

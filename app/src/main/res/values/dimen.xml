@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="splashIcon">70dp</dimen>
     <dimen name="listCover">55dp</dimen>
     <dimen name="playerCover">300dp</dimen>
 </resources>
