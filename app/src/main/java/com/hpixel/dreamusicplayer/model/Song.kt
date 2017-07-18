@@ -27,6 +27,8 @@ data class Song(
                 MediaStore.Audio.Media.ALBUM,
                 MediaStore.Audio.Media.ALBUM_ID
         )
+
+        val DEFAULT_FILE_PATH = "/"
     }
 
     val album : Album

@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.ImageView
 import android.widget.TextView
 import com.hpixel.dreamusicplayer.R
-import com.hpixel.dreamusicplayer.controller.MediaPlayerService
+import com.hpixel.dreamusicplayer.controller.mediaplayer.MediaPlayerService
 import com.hpixel.dreamusicplayer.model.Current
 
 
