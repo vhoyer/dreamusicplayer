@@ -46,11 +46,11 @@ class PlayerActivity : AppCompatActivity() {
         txtArtist.text = artist
         txtAlbum.text = album
         imgCover.setImageDrawable(artwork)
-        
-        playAudio(songToPlay.filePath)
+
+        playAudio()
     }
 
-    private fun playAudio(media: String) {
+    private fun playAudio() {
         //Check is service is active
         if (!serviceBound) {
             val playerIntent = Intent(this, MediaPlayerService::class.java)

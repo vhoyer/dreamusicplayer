@@ -1,7 +1,6 @@
 package com.hpixel.dreamusicplayer.controller.mediaplayer
 
 import android.app.Service
-import android.content.Context
 import android.content.Intent
 import android.media.AudioManager
 import android.media.MediaPlayer
@@ -17,14 +16,12 @@ import java.io.IOException
 /**
  * Class from www.sitepoint.com/a-step-by-step-guide-to-building-an-android-audio-player-app/ converted to kotlin by vhoyer on 13/07/17.
  */
-class MediaPlayerService : Service(), AudioManager.OnAudioFocusChangeListener {
+class MediaPlayerService : Service() {
 
-    private val mediaPlayer = MediaPlayer()
-    private var resumePosition = 0
+    val mediaPlayer = MediaPlayer()
+    var resumePosition = 0
 
     private val iBinder = LocalBinder()
-
-    private var audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
     override fun onBind(parentIntent: Intent?): IBinder {
         return iBinder
@@ -89,7 +86,8 @@ class MediaPlayerService : Service(), AudioManager.OnAudioFocusChangeListener {
         }
 
         //Request audio focus
-        if (requestAudioFocus() == false) {
+        val audioFocusListener = AudioFocusChangeListener(this)
+        if (!audioFocusListener.requestAudioFocus()) {
             //Could not gain focus
             stopSelf();
         }
@@ -105,77 +103,12 @@ class MediaPlayerService : Service(), AudioManager.OnAudioFocusChangeListener {
         stopMedia()
         mediaPlayer.release()
 
-        removeAudioFocus()
+        val audioFocusListener = AudioFocusChangeListener(this)
+        audioFocusListener.removeAudioFocus()
     }
 
     inner class LocalBinder : Binder() {
         val service: MediaPlayerService
             get() = this@MediaPlayerService
-    }
-
-    //
-    // AudioManager.OnAudioFocusChangeListener Implementations
-    //
-
-    override fun onAudioFocusChange(focusState: Int) {
-        when (focusState) {
-            AudioManager.AUDIOFOCUS_GAIN -> audioFocus_gain()
-            AudioManager.AUDIOFOCUS_LOSS -> audioFocus_loss()
-            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT -> audioFocus_transient()
-            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> audioFocus_canDuck()
-        }
-    }
-
-    private fun audioFocus_canDuck() {
-        // Lost focus for a short time, but it's ok to keep playing
-        // at an attenuated level
-        if (mediaPlayer.isPlaying) {
-            mediaPlayer.setVolume(0.1f, 0.1f)
-        }
-    }
-
-    private fun audioFocus_transient() {
-        // Lost focus for a short time, but we have to stop
-        // playback. We don't release the media player because playback
-        // is likely to resume
-        if (mediaPlayer.isPlaying) {
-            mediaPlayer.pause()
-        }
-    }
-
-    private fun audioFocus_loss(){
-        // Lost focus for an unbounded amount of time: stop playback and release media player
-        if (mediaPlayer.isPlaying) {
-            mediaPlayer.stop()
-        }
-        mediaPlayer.release()
-    }
-
-    private fun audioFocus_gain(){
-        // resume playback
-        if (!mediaPlayer.isPlaying) {
-            mediaPlayer.start()
-        }
-        mediaPlayer.setVolume(1.0f, 1.0f)
-    }
-
-    private fun requestAudioFocus(): Boolean {
-        audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-
-        val result = audioManager.requestAudioFocus(
-                this,
-                AudioManager.STREAM_MUSIC,
-                AudioManager.AUDIOFOCUS_GAIN
-        )
-        if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-            //Focus gained
-            return true
-        }
-        //Could not gain focus
-        return false
-    }
-
-    private fun removeAudioFocus(): Boolean {
-        return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == audioManager.abandonAudioFocus(this)
     }
 }
