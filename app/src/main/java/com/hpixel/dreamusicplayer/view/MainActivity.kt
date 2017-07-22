@@ -10,6 +10,8 @@ import com.hpixel.dreamusicplayer.R
 import com.hpixel.dreamusicplayer.controller.ListProvider
 import com.hpixel.dreamusicplayer.controller.SongsArrayAdaptor
 import com.hpixel.dreamusicplayer.model.Current
+import com.hpixel.dreamusicplayer.model.Settings
+import com.hpixel.dreamusicplayer.model.Song
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
@@ -21,7 +23,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
         //filters out whatsapp audio file to create playlist
         val listProvider = ListProvider(context)
-        val listFilter = ListProvider.WHATSAPP_AUDIO_FILTER
+        val listFilter = chooseFilter()
         val songList = listProvider.songList(listFilter)
         val albumList = listProvider.albumList()
 
@@ -34,7 +36,13 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         songListView.onItemClickListener = this
 	}
 
+    fun chooseFilter() : (Song) -> Boolean {
+        if (Settings.EXCLUDE_WHATSAPP_AUDIO_IN_MAIN_LIST){
+            return ListProvider.WHATSAPP_AUDIO_FILTER
+        }
 
+        return ListProvider.ALL_AUDIO_FILES
+    }
 
     override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         val myIntent = Intent(parent.context, PlayerActivity::class.java)
