@@ -6,6 +6,7 @@ import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Binder
 import android.os.IBinder
+import com.hpixel.dreamusicplayer.controller.mediaplayer.receivers.RegisterReceivers
 import com.hpixel.dreamusicplayer.model.Current
 import com.hpixel.dreamusicplayer.model.Song
 import java.io.IOException
@@ -93,6 +94,7 @@ class MediaPlayerService : Service() {
         }
 
         initMediaPlayer(songSource)
+        RegisterReceivers(this)
 
         return returnValue
     }
