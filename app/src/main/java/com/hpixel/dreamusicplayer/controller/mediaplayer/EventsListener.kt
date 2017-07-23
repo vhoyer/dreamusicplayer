@@ -30,7 +30,6 @@ class EventsListener(val host: MediaPlayerService) :
     }
 
     override fun onSeekComplete(p0: MediaPlayer?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onInfo(p0: MediaPlayer?, p1: Int, p2: Int): Boolean {

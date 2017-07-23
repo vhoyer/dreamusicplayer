@@ -1,12 +1,14 @@
-package com.hpixel.dreamusicplayer.view
+package com.hpixel.dreamusicplayer.view.player
 
 import android.content.*
 import android.os.Bundle
 import android.os.IBinder
 import android.support.v7.app.AppCompatActivity
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.hpixel.dreamusicplayer.R
+import com.hpixel.dreamusicplayer.controller.GlideApp
 import com.hpixel.dreamusicplayer.controller.mediaplayer.MediaPlayerService
 import com.hpixel.dreamusicplayer.model.Current
 import com.hpixel.dreamusicplayer.model.Settings
@@ -25,6 +27,9 @@ class PlayerActivity : AppCompatActivity() {
         playAudio()
 
         registerReceivers()
+
+        //set oncliks and everything
+        PlayerEventHandlers(this)
     }
 
     private fun playAudio() {
@@ -44,15 +49,13 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     fun updateLabels() {
-        val context = this.applicationContext
-
         val songToPlay = Current.song
         val playingAlbum = Current.album
 
         val title = songToPlay.title
         val artist = songToPlay.artist
         val album = songToPlay.albumName
-        val artwork = playingAlbum.getArtwork(context)
+        val artwork = playingAlbum.artworkPath
 
         val txtTitle = findViewById(R.id.player_title) as TextView
         val txtArtist = findViewById(R.id.player_artist) as TextView
@@ -62,7 +65,21 @@ class PlayerActivity : AppCompatActivity() {
         txtTitle.text = title
         txtArtist.text = artist
         txtAlbum.text = album
-        imgCover.setImageDrawable(artwork)
+        GlideApp.with(this)
+                .load(artwork)
+                .into(imgCover)
+
+        updatePlayButton()
+    }
+
+    fun updatePlayButton() {
+        val resources = this.resources
+        val playPauseButton = findViewById(R.id.player_playButton) as ImageButton
+
+        val drawable_id = if(Current.playing) R.drawable.ic_play_arrow_black else R.drawable.ic_pause_black
+
+        val ic = resources.getDrawable(drawable_id, null)
+        playPauseButton.setImageDrawable(ic)
     }
 
     private val PlayingNewAudioReceiver = object : BroadcastReceiver() {

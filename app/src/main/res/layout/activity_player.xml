@@ -5,8 +5,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
-    tools:context="com.hpixel.dreamusicplayer.view.PlayerActivity">
+    android:layout_margin="8dp"
+    tools:context="com.hpixel.dreamusicplayer.view.player.PlayerActivity">
 
     <ImageView
         android:id="@+id/player_cover"
@@ -17,7 +17,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="5dp"/>
 
     <TextView
         android:id="@+id/player_title"
@@ -46,7 +46,7 @@
 		android:textAppearance="@android:style/TextAppearance.Material.Medium"
 		android:textColor="@color/whitish"/>
 
-    <FrameLayout
+    <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -75,10 +75,11 @@
                     android:layout_height="match_parent"/>
 
                 <ImageButton
+                    android:id="@+id/player_playButton"
                     android:background="@null"
                     android:scaleType="fitCenter"
                     android:tint="@color/whitish"
-                    android:src="@drawable/ic_play_arrow_black"
+                    android:src="@drawable/ic_pause_black"
                     android:layout_width="@dimen/player_buttons"
                     android:layout_height="@dimen/player_buttons"/>
 
@@ -99,14 +100,32 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="10dp"/>
+                android:layout_height="14dp"/>
 
             <SeekBar
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_gravity="left"
+                    android:text="00:00"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_gravity="right"
+                    android:text="00:00"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </GridLayout>
+
         </LinearLayout>
 
-    </FrameLayout>
+    </GridLayout>
 
 </LinearLayout>

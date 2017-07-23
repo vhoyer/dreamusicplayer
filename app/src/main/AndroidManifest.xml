@@ -30,7 +30,7 @@
         <activity android:name=".view.MainActivity">
         </activity>
 
-        <activity android:name=".view.PlayerActivity">
+        <activity android:name=".view.player.PlayerActivity">
         </activity>
     </application>
 

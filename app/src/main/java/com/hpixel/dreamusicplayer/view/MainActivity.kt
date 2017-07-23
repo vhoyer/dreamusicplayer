@@ -11,6 +11,7 @@ import com.hpixel.dreamusicplayer.controller.ListProvider
 import com.hpixel.dreamusicplayer.model.Current
 import com.hpixel.dreamusicplayer.model.Settings
 import com.hpixel.dreamusicplayer.model.Song
+import com.hpixel.dreamusicplayer.view.player.PlayerActivity
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 

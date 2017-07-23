@@ -16,7 +16,7 @@ class Current {
 
         var shuffling = false
         var repeating: Int = this.REPEAT_NOT
-
+        var playing = false
 
         private var currentPlaylistPosition: Int = 0
         val playlistPosition : Int

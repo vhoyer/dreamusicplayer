@@ -7,6 +7,7 @@ class Settings {
     companion object {
         val PACKAGE_NAME = "com.hpixel.dreamusicplayer"
         val Broadcast_PLAYING_NEW_AUDIO = "$PACKAGE_NAME.PlayingNewAudio"
+        val Broadcast_PLAY_PAUSE_AUDIO = "$PACKAGE_NAME.PlayPauseAudio"
 
 
         var EXCLUDE_WHATSAPP_AUDIO_IN_MAIN_LIST = true

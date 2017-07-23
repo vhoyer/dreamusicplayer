@@ -47,12 +47,14 @@ class MediaPlayerService : Service() {
     fun playMedia() {
         mediaPlayer?.run {
             if (!isPlaying) start()
+            Current.playing = true
         }
     }
 
     fun stopMedia() {
         mediaPlayer?.run {
             if (isPlaying) stop()
+            Current.playing = false
         }
     }
 
@@ -62,15 +64,17 @@ class MediaPlayerService : Service() {
                 pause()
                 resumePosition = currentPosition
             }
+            Current.playing = false
         }
     }
 
     fun resumeMedia() {
         mediaPlayer?.run {
-            if (isPlaying) {
+            if (!isPlaying) {
                 seekTo(resumePosition)
                 start()
             }
+            Current.playing = true
         }
     }
 
