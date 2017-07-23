@@ -1,9 +1,6 @@
 package com.hpixel.dreamusicplayer.view
 
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import android.content.ServiceConnection
+import android.content.*
 import android.os.Bundle
 import android.os.IBinder
 import android.support.v7.app.AppCompatActivity
@@ -26,6 +23,8 @@ class PlayerActivity : AppCompatActivity() {
         updateLabels()
 
         playAudio()
+
+        registerReceivers()
     }
 
     private fun playAudio() {
@@ -40,7 +39,7 @@ class PlayerActivity : AppCompatActivity() {
         //Service is active
         //Send media with BroadcastReceiver
         //Send a broadcast to the service -> PLAY_NEW_AUDIO
-        val broadcastIntent = Intent(Settings.Broadcast_PLAY_NEW_AUDIO)
+        val broadcastIntent = Intent(Settings.Broadcast_PLAYING_NEW_AUDIO)
         sendBroadcast(broadcastIntent)
     }
 
@@ -64,6 +63,18 @@ class PlayerActivity : AppCompatActivity() {
         txtArtist.text = artist
         txtAlbum.text = album
         imgCover.setImageDrawable(artwork)
+    }
+
+    private val PlayingNewAudioReceiver = object : BroadcastReceiver() {
+        override fun onReceive(p0: Context?, p1: Intent?) {
+            //on .PlayingNewAudioReceiver
+            updateLabels()
+        }
+    }
+
+    private fun registerReceivers() {
+        val playNewAudio = IntentFilter(Settings.Broadcast_PLAYING_NEW_AUDIO)
+        registerReceiver(PlayingNewAudioReceiver, playNewAudio)
     }
 
     //Binding this Client to the AudioPlayer Service
