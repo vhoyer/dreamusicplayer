@@ -1,8 +1,8 @@
 package com.hpixel.dreamusicplayer.controller.mediaplayer
 
-import android.media.AudioManager
 import android.media.MediaPlayer
 import android.util.Log
+import com.hpixel.dreamusicplayer.model.Current
 
 /**
  * Created by vhoyer on 14/07/17.
@@ -45,6 +45,15 @@ class EventsListener(val host: MediaPlayerService) :
 
     override fun onCompletion(p0: MediaPlayer?) {
         //Invoked when playback of a media source has completed.
+        if (Current.playlistPosition < Current.playlistLenght){
+            val newPlaylistPosition = Current.playlistPosition + 1
+            Current.changeSong(newPlaylistPosition)
+
+            host.updateMedia()
+
+            return
+        }
+
         host.stopMedia();
         //stop the service
         host.stopSelf();

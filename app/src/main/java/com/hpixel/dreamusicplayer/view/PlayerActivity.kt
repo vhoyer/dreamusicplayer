@@ -12,14 +12,10 @@ import android.widget.TextView
 import com.hpixel.dreamusicplayer.R
 import com.hpixel.dreamusicplayer.controller.mediaplayer.MediaPlayerService
 import com.hpixel.dreamusicplayer.model.Current
-
-
-
-
+import com.hpixel.dreamusicplayer.model.Settings
 
 
 class PlayerActivity : AppCompatActivity() {
-
     private var player : MediaPlayerService? = null
     private var serviceBound: Boolean = false
 
@@ -27,6 +23,28 @@ class PlayerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
 
+        updateLabels()
+
+        playAudio()
+    }
+
+    private fun playAudio() {
+        if (!serviceBound) {
+            //service is not active
+            val playerIntent = Intent(this, MediaPlayerService::class.java)
+            startService(playerIntent)
+
+            bindService(playerIntent, serviceConnection, Context.BIND_ABOVE_CLIENT)
+            return
+        }
+        //Service is active
+        //Send media with BroadcastReceiver
+        //Send a broadcast to the service -> PLAY_NEW_AUDIO
+        val broadcastIntent = Intent(Settings.Broadcast_PLAY_NEW_AUDIO)
+        sendBroadcast(broadcastIntent)
+    }
+
+    fun updateLabels() {
         val context = this.applicationContext
 
         val songToPlay = Current.song
@@ -46,20 +64,6 @@ class PlayerActivity : AppCompatActivity() {
         txtArtist.text = artist
         txtAlbum.text = album
         imgCover.setImageDrawable(artwork)
-
-        playAudio()
-    }
-
-    private fun playAudio() {
-        //Check is service is active
-        if (!serviceBound) {
-            val playerIntent = Intent(this, MediaPlayerService::class.java)
-            startService(playerIntent)
-            bindService(playerIntent, serviceConnection, Context.BIND_AUTO_CREATE)
-        } else {
-            //Service is active
-            //Send media with BroadcastReceiver
-        }
     }
 
     //Binding this Client to the AudioPlayer Service

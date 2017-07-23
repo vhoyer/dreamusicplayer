@@ -47,7 +47,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         val myIntent = Intent(parent.context, PlayerActivity::class.java)
         val playlist = Current.playlist
-        Current.arrayPosition = position
         Current.changeSong(playlist[position])
 
         parent.context.startActivity(myIntent)

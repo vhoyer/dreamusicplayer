@@ -6,7 +6,7 @@ import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Binder
 import android.os.IBinder
-import com.hpixel.dreamusicplayer.controller.mediaplayer.receivers.RegisterReceivers
+import com.hpixel.dreamusicplayer.controller.mediaplayer.receivers.ReceiversRegistry
 import com.hpixel.dreamusicplayer.model.Current
 import com.hpixel.dreamusicplayer.model.Song
 import java.io.IOException
@@ -19,7 +19,7 @@ import java.io.IOException
  */
 class MediaPlayerService : Service() {
 
-    val mediaPlayer = MediaPlayer()
+    var mediaPlayer: MediaPlayer? = null
     var resumePosition = 0
 
     private val iBinder = LocalBinder()
@@ -28,52 +28,73 @@ class MediaPlayerService : Service() {
         return iBinder
     }
 
-    fun initMediaPlayer(songSource: String){
+    fun initMediaPlayer(){
+        mediaPlayer = MediaPlayer()
         val eventsListener = EventsListener(this)
         //Set up MediaPlayer event listeners
-        mediaPlayer.setOnCompletionListener(eventsListener)
-        mediaPlayer.setOnErrorListener(eventsListener)
-        mediaPlayer.setOnPreparedListener(eventsListener)
-        mediaPlayer.setOnBufferingUpdateListener(eventsListener)
-        mediaPlayer.setOnSeekCompleteListener(eventsListener)
-        mediaPlayer.setOnInfoListener(eventsListener)
-        //Reset so that the MediaPlayer is not pointing to another data source
-        mediaPlayer.reset()
+        mediaPlayer?.apply {
+            setOnCompletionListener(eventsListener)
+            setOnErrorListener(eventsListener)
+            setOnPreparedListener(eventsListener)
+            setOnBufferingUpdateListener(eventsListener)
+            setOnSeekCompleteListener(eventsListener)
+            setOnInfoListener(eventsListener)
+        }
 
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
-        try{
-            mediaPlayer.setDataSource(songSource)
-        }
-        catch (e : IOException){
-            e.printStackTrace()
-            stopSelf()
-        }
-        mediaPlayer.prepareAsync()
+        updateMedia()
     }
 
     fun playMedia() {
-        if (!mediaPlayer.isPlaying) {
-            mediaPlayer.start()
+        mediaPlayer?.run {
+            if (!isPlaying) start()
         }
     }
 
     fun stopMedia() {
-        if (mediaPlayer.isPlaying) {
-            mediaPlayer.stop()
+        mediaPlayer?.run {
+            if (isPlaying) stop()
         }
     }
 
     fun pauseMedia() {
-        if (mediaPlayer.isPlaying) {
-            mediaPlayer.pause()
-            resumePosition = mediaPlayer.currentPosition
+        mediaPlayer?.run {
+            if (isPlaying) {
+                pause()
+                resumePosition = currentPosition
+            }
         }
     }
 
     fun resumeMedia() {
-        if (!mediaPlayer.isPlaying) {
-            mediaPlayer.seekTo(resumePosition)
-            mediaPlayer.start()
+        mediaPlayer?.run {
+            if (isPlaying) {
+                seekTo(resumePosition)
+                start()
+            }
+        }
+    }
+
+    fun updateMedia() {
+        val songSource = Current.song.filePath
+        if (songSource == Song.DEFAULT_FILE_PATH){
+            //stop self because there is no song to be played
+            stopSelf()
+        }
+
+        mediaPlayer?.apply {
+            //Reset so that the MediaPlayer is not pointing to another data source
+            reset()
+
+            setAudioStreamType(AudioManager.STREAM_MUSIC)
+            try{
+                setDataSource(songSource)
+            }
+            catch (e : IOException){
+                e.printStackTrace()
+                stopSelf()
+            }
+
+            prepareAsync()
         }
     }
 
@@ -93,8 +114,8 @@ class MediaPlayerService : Service() {
             stopSelf();
         }
 
-        initMediaPlayer(songSource)
-        RegisterReceivers(this)
+        initMediaPlayer()
+        ReceiversRegistry(this).register()
 
         return returnValue
     }
@@ -103,7 +124,9 @@ class MediaPlayerService : Service() {
         super.onDestroy()
 
         stopMedia()
-        mediaPlayer.release()
+        mediaPlayer?.release()
+        mediaPlayer = null
+        //ReceiversRegistry(this).unregister()
 
         val audioFocusListener = AudioFocusChangeListener(this)
         audioFocusListener.removeAudioFocus()

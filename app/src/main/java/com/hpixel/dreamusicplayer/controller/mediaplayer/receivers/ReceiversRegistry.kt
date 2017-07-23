@@ -8,12 +8,16 @@ import com.hpixel.dreamusicplayer.controller.mediaplayer.MediaPlayerService
 /**
  * Created by vhoyer on 22/07/17.
  */
-class RegisterReceivers(val host : MediaPlayerService) {
+class ReceiversRegistry(val host : MediaPlayerService) {
 
-    val becomingNoisyReceiver = BecomingNoisyReceiver(host)
+    private val becomingNoisyReceiver = BecomingNoisyReceiver(host)
 
-    init {
+    fun register() {
         registerBecomingNoisyReceiver()
+    }
+
+    fun unregister(){
+        host.unregisterReceiver(becomingNoisyReceiver)
     }
 
     private fun registerBecomingNoisyReceiver() {

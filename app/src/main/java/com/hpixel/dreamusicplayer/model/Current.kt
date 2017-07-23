@@ -7,7 +7,13 @@ class Current {
     companion object {
         var albumsInfo: ArrayList<Album> = ArrayList<Album>()
         var playlist: ArrayList<Song> = ArrayList<Song>()
-        var arrayPosition : Int = 0
+        val playlistLenght : Int
+            get() = playlist.size
+
+
+        private var currentPlaylistPosition: Int = 0
+        val playlistPosition : Int
+            get() = currentPlaylistPosition
 
         private var currentAlbum : Album = Album()
         val album : Album
@@ -19,6 +25,19 @@ class Current {
 
         fun changeSong(song: Song){
             currentSong = song
+            currentPlaylistPosition = playlist.indexOf(song)
+
+            changeAlbum()
+        }
+
+        fun changeSong(index: Int){
+            currentSong = playlist[index]
+            currentPlaylistPosition = index
+
+            changeAlbum()
+        }
+
+        private fun changeAlbum(){
             val albumFound = albumsInfo.find {
                 album -> album.id == song.albumID
             }

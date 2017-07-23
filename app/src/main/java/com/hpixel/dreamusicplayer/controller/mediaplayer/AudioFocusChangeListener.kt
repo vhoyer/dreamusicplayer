@@ -9,7 +9,7 @@ import android.media.MediaPlayer
  */
 class AudioFocusChangeListener(host: MediaPlayerService) : AudioManager.OnAudioFocusChangeListener {
 
-    val mediaPlayer : MediaPlayer
+    val mediaPlayer : MediaPlayer?
     val context : Context
 
     init {
@@ -29,8 +29,10 @@ class AudioFocusChangeListener(host: MediaPlayerService) : AudioManager.OnAudioF
     private fun audioFocus_canDuck() {
         // Lost focus for a short time, but it's ok to keep playing
         // at an attenuated level
+        if (mediaPlayer == null) return
+
         if (mediaPlayer.isPlaying) {
-            mediaPlayer.setVolume(0.1f, 0.1f)
+            mediaPlayer.setVolume(0.5f, 0.5f)
         }
     }
 
@@ -38,6 +40,8 @@ class AudioFocusChangeListener(host: MediaPlayerService) : AudioManager.OnAudioF
         // Lost focus for a short time, but we have to stop
         // playback. We don't release the media player because playback
         // is likely to resume
+        if (mediaPlayer == null) return
+
         if (mediaPlayer.isPlaying) {
             mediaPlayer.pause()
         }
@@ -45,6 +49,8 @@ class AudioFocusChangeListener(host: MediaPlayerService) : AudioManager.OnAudioF
 
     private fun audioFocus_loss(){
         // Lost focus for an unbounded amount of time: stop playback and release media player
+        if (mediaPlayer == null) return
+
         if (mediaPlayer.isPlaying) {
             mediaPlayer.stop()
         }
@@ -53,6 +59,8 @@ class AudioFocusChangeListener(host: MediaPlayerService) : AudioManager.OnAudioF
 
     private fun audioFocus_gain(){
         // resume playback
+        if (mediaPlayer == null) return
+
         if (!mediaPlayer.isPlaying) {
             mediaPlayer.start()
         }
