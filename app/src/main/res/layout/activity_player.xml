@@ -10,32 +10,103 @@
 
     <ImageView
         android:id="@+id/player_cover"
+        android:src="@drawable/null_artwork"
         android:layout_gravity="center_horizontal"
         android:layout_width="@dimen/playerCover"
         android:layout_height="@dimen/playerCover"/>
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
     <TextView
         android:id="@+id/player_title"
+        android:text="@string/app_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textAppearance="@android:style/TextAppearance.Material.Headline"
-        android:textColor="@color/songList_title"/>
+        android:textColor="@color/whitish"/>
 
     <TextView
         android:id="@+id/player_artist"
+        android:text="@string/app_name"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
         android:textAlignment="center"
 		android:textAppearance="@android:style/TextAppearance.Material.Medium"
-		android:textColor="@color/songList_title"/>
+		android:textColor="@color/whitish"/>
 
     <TextView
         android:id="@+id/player_album"
+        android:text="@string/app_name"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
         android:textAlignment="center"
 		android:textAppearance="@android:style/TextAppearance.Material.Medium"
-		android:textColor="@color/songList_title"/>
+		android:textColor="@color/whitish"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:background="@null"
+                    android:scaleType="fitCenter"
+                    android:tint="@color/whitish"
+                    android:src="@drawable/ic_skip_previous_black"
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/player_buttons"
+                    android:layout_height="@dimen/player_buttons"/>
+
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"/>
+
+                <ImageButton
+                    android:background="@null"
+                    android:scaleType="fitCenter"
+                    android:tint="@color/whitish"
+                    android:src="@drawable/ic_play_arrow_black"
+                    android:layout_width="@dimen/player_buttons"
+                    android:layout_height="@dimen/player_buttons"/>
+
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"/>
+
+                <ImageButton
+                    android:background="@null"
+                    android:scaleType="fitCenter"
+                    android:tint="@color/whitish"
+                    android:src="@drawable/ic_skip_next_black"
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/player_buttons"
+                    android:layout_height="@dimen/player_buttons"/>
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
 
 </LinearLayout>

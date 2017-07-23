@@ -5,6 +5,6 @@
     <color name="accent">#ee6f39</color>
     <color name="colorBackground">#333333</color>
 
-    <color name="songList_title">#f6f6f6</color>
+    <color name="whitish">#f6f6f6</color>
     <color name="songList_detail">#adadad</color>
 </resources>

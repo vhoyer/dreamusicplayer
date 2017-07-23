@@ -2,6 +2,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat">
         <!-- Customize your theme here. -->
+        <item name="android:progressTint">@color/accent</item>
+        <item name="android:thumbTint">@color/accent</item>
+
 
         <item name="colorAccent">@color/accent</item>
     </style>
