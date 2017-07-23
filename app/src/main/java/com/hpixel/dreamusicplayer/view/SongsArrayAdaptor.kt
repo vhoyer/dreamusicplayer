@@ -1,4 +1,4 @@
-package com.hpixel.dreamusicplayer.controller
+package com.hpixel.dreamusicplayer.view
 
 import android.app.Activity
 import android.content.Context
@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.hpixel.dreamusicplayer.R
+import com.hpixel.dreamusicplayer.controller.GlideApp
 import com.hpixel.dreamusicplayer.model.Song
 
 
@@ -33,7 +34,7 @@ class SongsArrayAdaptor(val listContext: Context, val songList: ArrayList<Song>)
 
 		//set values
 		layout_songTitle.text = song.title
-		layout_artistName.text = song.artist
+		layout_artistName.text = song.artist    
 		layout_albumName.text = song.albumName
         GlideApp
                 .with(listContext)

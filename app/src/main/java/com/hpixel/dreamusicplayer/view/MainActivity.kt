@@ -8,7 +8,6 @@ import android.widget.AdapterView
 import android.widget.ListView
 import com.hpixel.dreamusicplayer.R
 import com.hpixel.dreamusicplayer.controller.ListProvider
-import com.hpixel.dreamusicplayer.controller.SongsArrayAdaptor
 import com.hpixel.dreamusicplayer.model.Current
 import com.hpixel.dreamusicplayer.model.Settings
 import com.hpixel.dreamusicplayer.model.Song
