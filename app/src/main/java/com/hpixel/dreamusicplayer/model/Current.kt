@@ -5,10 +5,17 @@ package com.hpixel.dreamusicplayer.model
  */
 class Current {
     companion object {
+        val REPEAT_ALL = 2
+        val REPEAT_ONE = 1
+        val REPEAT_NOT = 0
+
         var albumsInfo: ArrayList<Album> = ArrayList<Album>()
         var playlist: ArrayList<Song> = ArrayList<Song>()
         val playlistLenght : Int
             get() = playlist.size
+
+        var shuffling = false
+        var repeating: Int = this.REPEAT_NOT
 
 
         private var currentPlaylistPosition: Int = 0

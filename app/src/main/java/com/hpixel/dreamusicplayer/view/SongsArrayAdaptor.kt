@@ -34,7 +34,7 @@ class SongsArrayAdaptor(val listContext: Context, val songList: ArrayList<Song>)
 
 		//set values
 		layout_songTitle.text = song.title
-		layout_artistName.text = song.artist    
+		layout_artistName.text = song.artist
 		layout_albumName.text = song.albumName
         GlideApp
                 .with(listContext)
