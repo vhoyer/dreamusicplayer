@@ -25,7 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textAppearance="@android:style/TextAppearance.Material.Headline"
+        android:lines="1"
+        android:textAppearance="@android:style/TextAppearance.Material.Title"
         android:textColor="@color/whitish"/>
 
     <TextView
@@ -34,7 +35,8 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
         android:textAlignment="center"
-		android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:lines="1"
+		android:textAppearance="@android:style/TextAppearance.Material.Small"
 		android:textColor="@color/whitish"/>
 
     <TextView
@@ -43,7 +45,8 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
         android:textAlignment="center"
-		android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:lines="1"
+		android:textAppearance="@android:style/TextAppearance.Material.Small"
 		android:textColor="@color/whitish"/>
 
     <GridLayout
