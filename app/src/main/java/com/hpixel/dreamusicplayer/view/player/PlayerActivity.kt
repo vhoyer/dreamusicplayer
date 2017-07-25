@@ -23,6 +23,7 @@ class PlayerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_player)
 
         updateLabels()
+        updatePlayButton()
 
         playAudio()
 
@@ -48,6 +49,10 @@ class PlayerActivity : AppCompatActivity() {
         sendBroadcast(broadcastIntent)
     }
 
+    //
+    // Update UI
+    //
+
     fun updateLabels() {
         val songToPlay = Current.song
         val playingAlbum = Current.album
@@ -69,10 +74,9 @@ class PlayerActivity : AppCompatActivity() {
         txtAlbum.text = album
         GlideApp.with(this)
                 .load(artwork)
+                .placeholder(R.drawable.null_artwork)
                 .into(imgCover)
         txtTotalTime.text = totalTime
-
-        updatePlayButton()
     }
 
     fun updatePlayButton() {
@@ -84,6 +88,10 @@ class PlayerActivity : AppCompatActivity() {
         val ic = resources.getDrawable(drawable_id, null)
         playPauseButton.setImageDrawable(ic)
     }
+
+    //
+    // Broadcast receiver
+    //
 
     private val PlayingNewAudioReceiver = object : BroadcastReceiver() {
         override fun onReceive(p0: Context?, p1: Intent?) {
@@ -97,7 +105,10 @@ class PlayerActivity : AppCompatActivity() {
         registerReceiver(PlayingNewAudioReceiver, playNewAudio)
     }
 
-    //Binding this Client to the AudioPlayer Service
+    //
+    // Binding this Client to the AudioPlayer Service
+    //
+
     private val serviceConnection = object : ServiceConnection {
 
         override fun onServiceConnected(name: ComponentName, service: IBinder) {
@@ -111,6 +122,10 @@ class PlayerActivity : AppCompatActivity() {
             serviceBound = false
         }
     }
+
+    //
+    // lifecycle
+    //
 
     override fun onSaveInstanceState(savedInstanceState: Bundle) {
         savedInstanceState.putBoolean("ServiceState", serviceBound)

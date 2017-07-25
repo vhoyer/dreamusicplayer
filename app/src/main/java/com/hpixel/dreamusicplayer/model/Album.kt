@@ -9,7 +9,7 @@ import com.hpixel.dreamusicplayer.R
  */
 data class Album(
         val id: Int = 0,
-        val artworkPath: String = ""
+        val artworkPath: String? = null
 )
 {
     fun getArtwork(context: Context)  : Drawable{
