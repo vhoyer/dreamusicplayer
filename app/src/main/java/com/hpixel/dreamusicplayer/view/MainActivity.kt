@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 	}
 
     fun chooseFilter() : (Song) -> Boolean {
-        if (Settings.EXCLUDE_WHATSAPP_AUDIO_IN_MAIN_LIST){
+        if (Settings.exclude_whatsapp_audio_in_main_list){
             return ListProvider.WHATSAPP_AUDIO_FILTER
         }
 

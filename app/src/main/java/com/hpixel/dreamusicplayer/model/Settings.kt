@@ -10,7 +10,8 @@ class Settings {
         val Broadcast_PLAY_PAUSE_AUDIO = "$PACKAGE_NAME.PlayPauseAudio"
 
 
-        var EXCLUDE_WHATSAPP_AUDIO_IN_MAIN_LIST = true
+        var exclude_whatsapp_audio_in_main_list = true
+        var ms_of_tolerance_in_skipping_back = 5000
     }
 
     fun loadSettings() {}
