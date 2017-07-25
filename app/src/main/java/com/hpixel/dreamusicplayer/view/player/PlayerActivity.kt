@@ -56,11 +56,13 @@ class PlayerActivity : AppCompatActivity() {
         val artist = songToPlay.artist
         val album = songToPlay.albumName
         val artwork = playingAlbum.artworkPath
+        val totalTime = songToPlay.getHumanDuration()
 
         val txtTitle = findViewById(R.id.player_title) as TextView
         val txtArtist = findViewById(R.id.player_artist) as TextView
         val txtAlbum = findViewById(R.id.player_album) as TextView
         val imgCover = findViewById(R.id.player_cover) as ImageView
+        val txtTotalTime = findViewById(R.id.player_totalTime) as TextView
 
         txtTitle.text = title
         txtArtist.text = artist
@@ -68,6 +70,7 @@ class PlayerActivity : AppCompatActivity() {
         GlideApp.with(this)
                 .load(artwork)
                 .into(imgCover)
+        txtTotalTime.text = totalTime
 
         updatePlayButton()
     }

@@ -29,6 +29,12 @@ data class Song(
         )
 
         val DEFAULT_FILE_PATH = "/"
+
+        fun convertToHumanFormat(duration: Int): String {
+            val min = duration / 60000
+            val sec = String.format("%02d", (duration % 60000 / 1000))
+            return  "$min:$sec"
+        }
     }
 
     val album : Album
@@ -36,11 +42,8 @@ data class Song(
             val albumFound = Current.albumsInfo.find {
                 album -> album.id == this.albumID
             }
-
-            if (albumFound == null) {
-                return Album()
-            }
-            return albumFound
+            
+            return albumFound ?: Album()
         }
 
 	constructor(string : String, separator : String): this(){
@@ -56,9 +59,7 @@ data class Song(
 	}
 
 	//get Human Format Duration
-	fun getHDuration() : String {
-		val min = duration / 60000
-		val sec = "${duration % 60000 / 1000}".format("%02d")
-		return  "$min:$sec"
+	fun getHumanDuration() : String {
+        return convertToHumanFormat(duration)
 	}
 }
