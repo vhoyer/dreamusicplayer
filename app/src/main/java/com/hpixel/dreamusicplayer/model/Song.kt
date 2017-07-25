@@ -12,7 +12,7 @@ data class Song(
         var title : String = "no title",
         var filePath : String = "/",
         var displayName : String = "no display",
-        var duration : Int = 0,
+        var duration : Long = 0,
         var albumID : Int = 0
 )
 {
@@ -30,7 +30,7 @@ data class Song(
 
         val DEFAULT_FILE_PATH = "/"
 
-        fun convertToHumanFormat(duration: Int): String {
+        fun convertToHumanFormat(duration: Long): String {
             val min = duration / 60000
             val sec = String.format("%02d", (duration % 60000 / 1000))
             return  "$min:$sec"
@@ -42,7 +42,7 @@ data class Song(
             val albumFound = Current.albumsInfo.find {
                 album -> album.id == this.albumID
             }
-            
+
             return albumFound ?: Album()
         }
 
@@ -53,7 +53,7 @@ data class Song(
 		title = data[2]
 		filePath = data[3]
 		displayName = data[4]
-		duration = data[5].toInt()
+		duration = data[5].toLong()
         albumName = data[6]
         albumID = data[7].toInt()
 	}
