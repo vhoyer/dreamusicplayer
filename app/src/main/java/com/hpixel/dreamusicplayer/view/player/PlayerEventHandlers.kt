@@ -11,11 +11,8 @@ import com.hpixel.dreamusicplayer.model.Settings
  */
 class PlayerEventHandlers(val parent: PlayerActivity): View.OnClickListener {
 
-    val playPauseButton : ImageButton
-
     init{
-        playPauseButton = parent.findViewById(R.id.player_playButton) as ImageButton
-
+        val playPauseButton = parent.findViewById(R.id.player_playButton) as ImageButton
         playPauseButton.setOnClickListener(this)
     }
 

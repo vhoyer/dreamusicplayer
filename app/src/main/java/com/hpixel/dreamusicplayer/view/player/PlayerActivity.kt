@@ -6,6 +6,7 @@ import android.os.IBinder
 import android.support.v7.app.AppCompatActivity
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.SeekBar
 import android.widget.TextView
 import com.hpixel.dreamusicplayer.R
 import com.hpixel.dreamusicplayer.controller.GlideApp
@@ -62,12 +63,14 @@ class PlayerActivity : AppCompatActivity() {
         val album = songToPlay.albumName
         val artwork = playingAlbum.artworkPath
         val totalTime = songToPlay.getHumanDuration()
+        val totalTimeLong = songToPlay.duration.toInt()
 
         val txtTitle = findViewById(R.id.player_title) as TextView
         val txtArtist = findViewById(R.id.player_artist) as TextView
         val txtAlbum = findViewById(R.id.player_album) as TextView
         val imgCover = findViewById(R.id.player_cover) as ImageView
         val txtTotalTime = findViewById(R.id.player_totalTime) as TextView
+        val progressSeekBar = findViewById(R.id.player_seekBar) as SeekBar
 
         txtTitle.text = title
         txtArtist.text = artist
@@ -77,6 +80,7 @@ class PlayerActivity : AppCompatActivity() {
                 .placeholder(R.drawable.null_artwork)
                 .into(imgCover)
         txtTotalTime.text = totalTime
+        progressSeekBar.max = totalTimeLong
     }
 
     fun updatePlayButton() {
