@@ -46,9 +46,9 @@ class EventsListener(val host: MediaPlayerService) :
 
     override fun onCompletion(p0: MediaPlayer?) {
         //Invoked when playback of a media source has completed.
-        if (Current.playlistPosition < Current.playlistLenght){
+        if (Current.playlistPosition+1 < Current.playlistLenght){
             goToNextSongInPlaylist()
-            sendBroadcasts(Settings.Broadcast_PLAYING_NEW_AUDIO)
+            sendBroadcasts(Settings.Broadcast_NEW_AUDIO)
 
             return
         }

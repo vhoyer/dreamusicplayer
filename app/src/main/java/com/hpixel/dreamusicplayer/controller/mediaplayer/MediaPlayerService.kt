@@ -30,6 +30,7 @@ class MediaPlayerService : Service() {
 
     fun initMediaPlayer(){
         mediaPlayer = MediaPlayer()
+        Current.player.source = mediaPlayer
         val eventsListener = EventsListener(this)
         //Set up MediaPlayer event listeners
         mediaPlayer?.apply {
