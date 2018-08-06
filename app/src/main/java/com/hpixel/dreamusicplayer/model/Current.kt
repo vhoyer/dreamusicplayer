@@ -77,6 +77,10 @@ class Current {
         val player = object : playerObject {
             override var source : MediaPlayer? = null
 
+            override fun restartSong(){
+                source?.seekTo(0)
+            }
+
             override val position : Long
                 get() = source?.currentPosition?.toLong() ?: 0
 
@@ -90,5 +94,7 @@ class Current {
 
         val position : Long
         val isPlaying : Boolean
+
+        fun restartSong()
     }
 }

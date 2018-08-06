@@ -9,6 +9,7 @@ class Settings {
         val Broadcast_NEW_AUDIO = "$PACKAGE_NAME.NewAudio"
         val Broadcast_PLAY_PAUSE_AUDIO = "$PACKAGE_NAME.PlayPauseAudio"
         val Broadcast_NEXT_AUDIO_IN_PLAYLIST = "$PACKAGE_NAME.PlayNextAudio"
+        val Broadcast_PREVIOUS_AUDIO_IN_PLAYLIST = "$PACKAGE_NAME.PlayLastAudio"
 
 
         var exclude_whatsapp_audio_in_main_list = true

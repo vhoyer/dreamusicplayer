@@ -13,20 +13,28 @@ import com.hpixel.dreamusicplayer.model.Settings
 class PlayerEventHandlers(val parent: PlayerActivity): View.OnClickListener {
 
 	init{
-		val playPauseButton = parent.findViewById(R.id.player_playButton) as ImageButton
-		playPauseButton.setOnClickListener(this)
-
-        val nextAudioButton = parent.findViewById(R.id.player_skipNext) as ImageButton
-        nextAudioButton.setOnClickListener(this)
+        setListener(R.id.player_playButton)
+        setListener(R.id.player_skipNext)
+        setListener(R.id.player_skipPrevious)
 	}
+
+    fun setListener(id: Int){
+        val nextAudioButton = parent.findViewById( id ) as ImageButton
+        nextAudioButton.setOnClickListener(this)
+    }
 
 	override fun onClick(view: View?) {
 		when (view?.id){
 			R.id.player_playButton -> playPauseAudio()
 			R.id.player_skipNext -> nextSong()
+			R.id.player_skipPrevious -> previousSong()
 			else -> return
 		}
 	}
+
+    fun previousSong(){
+        broadcastBase(Settings.Broadcast_PREVIOUS_AUDIO_IN_PLAYLIST)
+    }
 
     fun nextSong() {
         broadcastBase(Settings.Broadcast_NEXT_AUDIO_IN_PLAYLIST)
