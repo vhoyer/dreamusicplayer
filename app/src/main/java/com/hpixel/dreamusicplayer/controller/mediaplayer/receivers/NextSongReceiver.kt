@@ -14,17 +14,10 @@ import com.hpixel.dreamusicplayer.model.Settings
     private val canIncrementPlaylistIndex : Boolean
         get() = Current.playlistPosition+1 < Current.playlistLenght
 
-	override fun onReceive(p0: Context?, p1: Intent?) {
+    override fun onReceive(p0: Context?, p1: Intent?) {
 
         Current.changeSong(newIndex())
         updateUI()
-
-        if (!canIncrementPlaylistIndex){
-            //stop the service
-            host.stopMedia()
-            host.stopSelf()
-            return
-        }
         host.updateMedia()
 	}
 
