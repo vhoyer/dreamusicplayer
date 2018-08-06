@@ -23,11 +23,23 @@ class LastOrRewindSongReceiver(val host: MediaPlayerService) : BroadcastReceiver
         Current.player.restartSong()
     }
 
+    private val canSkipBack: Boolean
+        get() = Current.playlistPosition -1 >= 0
+
     fun skipBack(){
-        Current.changeSong(Current.playlistPosition -1)
+        changeAudio()
         updateUI()
 
         host.updateMedia()
+    }
+
+    fun changeAudio(){
+        if (canSkipBack){
+            Current.changeSong( Current.playlistPosition -1 )
+        }
+        else {
+            Current.changeSong( Current.playlistLenght -1 )
+        }
     }
 
     fun updateUI(){
