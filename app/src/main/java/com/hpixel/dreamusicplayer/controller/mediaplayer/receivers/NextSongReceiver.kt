@@ -11,7 +11,8 @@ import com.hpixel.dreamusicplayer.model.Settings
  * Created by vhoyer on 19/11/17.
  */
  class NextSongReceiver(val host: MediaPlayerService): BroadcastReceiver() {
-    val canIncrementPlaylistIndex = Current.playlistPosition+1 < Current.playlistLenght
+    private val canIncrementPlaylistIndex : Boolean
+        get() = Current.playlistPosition+1 < Current.playlistLenght
 
 	override fun onReceive(p0: Context?, p1: Intent?) {
 
@@ -27,11 +28,11 @@ import com.hpixel.dreamusicplayer.model.Settings
         host.updateMedia()
 	}
 
-    fun newIndex() =
+    private fun newIndex() =
             if (canIncrementPlaylistIndex) Current.playlistPosition+1
             else 0
 
-    fun updateUI(){
+    private fun updateUI(){
         //with the new song information
         val intent = Intent()
         intent.action = Settings.Broadcast_NEW_AUDIO
