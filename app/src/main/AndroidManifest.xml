@@ -30,7 +30,10 @@
         <activity android:name=".view.MainActivity">
         </activity>
 
-        <activity android:name=".view.player.PlayerActivity">
+        <activity
+            android:name=".view.player.PlayerActivity"
+            android:theme="@style/SplashScreenTheme"
+            >
         </activity>
     </application>
 
