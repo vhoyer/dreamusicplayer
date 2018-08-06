@@ -13,14 +13,22 @@ class ReceiversRegistry(val host : MediaPlayerService) {
 
     private val becomingNoisyReceiver = BecomingNoisyReceiver(host)
     private val playPauseReceiver = PlayPauseReceiver(host)
+    private val nextAudioInPlaylist = NextSongReceiver(host)
 
     fun register() {
         registerBecomingNoisyReceiver()
         registerPlayPauseReceiver()
+        registerNextAudioInPlaylist()
     }
 
-    fun unregister(){
-        host.unregisterReceiver(becomingNoisyReceiver)
+    private fun registerNextAudioInPlaylist() {
+        val intentFilter = IntentFilter(Settings.Broadcast_NEXT_AUDIO_IN_PLAYLIST)
+        host.registerReceiver(nextAudioInPlaylist, intentFilter)
+    }
+
+    private fun registerPlayPauseReceiver() {
+        val intentFilter = IntentFilter(Settings.Broadcast_PLAY_PAUSE_AUDIO)
+        host.registerReceiver(playPauseReceiver, intentFilter)
     }
 
     private fun registerBecomingNoisyReceiver() {
@@ -29,8 +37,7 @@ class ReceiversRegistry(val host : MediaPlayerService) {
         host.registerReceiver(becomingNoisyReceiver, intentFilter)
     }
 
-    private fun registerPlayPauseReceiver() {
-        val intentFilter = IntentFilter(Settings.Broadcast_PLAY_PAUSE_AUDIO)
-        host.registerReceiver(playPauseReceiver, intentFilter)
+    fun unregister(){
+        host.unregisterReceiver(becomingNoisyReceiver)
     }
 }

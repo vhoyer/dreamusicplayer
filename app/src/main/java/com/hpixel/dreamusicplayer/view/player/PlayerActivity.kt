@@ -46,7 +46,7 @@ class PlayerActivity : AppCompatActivity() {
         //Service is active
         //Send media with BroadcastReceiver
         //Send a broadcast to the service -> PLAY_NEW_AUDIO
-        val broadcastIntent = Intent(Settings.Broadcast_PLAYING_NEW_AUDIO)
+        val broadcastIntent = Intent(Settings.Broadcast_NEW_AUDIO)
         sendBroadcast(broadcastIntent)
     }
 
@@ -105,7 +105,7 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun registerReceivers() {
-        val playNewAudio = IntentFilter(Settings.Broadcast_PLAYING_NEW_AUDIO)
+        val playNewAudio = IntentFilter(Settings.Broadcast_NEW_AUDIO)
         registerReceiver(PlayingNewAudioReceiver, playNewAudio)
     }
 
