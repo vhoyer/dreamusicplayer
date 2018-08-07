@@ -1,5 +1,6 @@
 package com.hpixel.dreamusicplayer.controller.mediaplayer.receivers
 
+import android.content.BroadcastReceiver
 import android.content.IntentFilter
 import android.media.AudioManager
 import com.hpixel.dreamusicplayer.controller.mediaplayer.MediaPlayerService
@@ -15,12 +16,20 @@ class ReceiversRegistry(val host : MediaPlayerService) {
     private val playPauseReceiver = PlayPauseReceiver(host)
     private val nextAudioInPlaylist = NextSongReceiver(host)
     private val lastAudioInPlaylist = LastOrRewindSongReceiver(host)
+    private val updateSongPosition = UpdateSongPosition(host)
 
     fun register() {
         registerBecomingNoisyReceiver()
         registerPlayPauseReceiver()
         registerNextAudioInPlaylist()
         registerLastAudioInPlaylist()
+
+        register(updateSongPosition, Settings.Broadcast_UPDATE_SONG_POSITION)
+    }
+
+    fun register(receiver: BroadcastReceiver, id: String){
+        val intentFilter = IntentFilter(id)
+        host.registerReceiver(receiver, intentFilter)
     }
 
     private fun registerLastAudioInPlaylist() {

@@ -137,6 +137,10 @@ class MediaPlayerService : Service() {
         audioFocusListener.removeAudioFocus()
     }
 
+    fun seekTo(newPosition: Int) {
+        mediaPlayer?.seekTo(newPosition)
+    }
+
     inner class LocalBinder : Binder() {
         val service: MediaPlayerService
             get() = this@MediaPlayerService

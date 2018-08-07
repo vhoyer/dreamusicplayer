@@ -11,6 +11,9 @@ class Settings {
         val Broadcast_NEXT_AUDIO_IN_PLAYLIST = "$PACKAGE_NAME.PlayNextAudio"
         val Broadcast_PREVIOUS_AUDIO_IN_PLAYLIST = "$PACKAGE_NAME.PlayLastAudio"
         val Broadcast_UPDATE_SEEKBAR = "$PACKAGE_NAME.UpdateSeekbar"
+        val Broadcast_UPDATE_SONG_POSITION = "$PACKAGE_NAME.UpdateSongPosition"
+
+        val Intent_SongPosition = "elapsed"
 
 
         var exclude_whatsapp_audio_in_main_list = true
