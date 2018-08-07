@@ -2,6 +2,7 @@ package com.hpixel.dreamusicplayer.view.player
 
 import android.content.*
 import android.os.Bundle
+import android.os.Handler
 import android.os.IBinder
 import android.support.v7.app.AppCompatActivity
 import android.widget.ImageButton
@@ -30,8 +31,25 @@ class PlayerActivity : AppCompatActivity() {
 
         registerReceivers()
 
+        setupUpdateSeekBarTimer()
+
         //set oncliks and everything
         PlayerEventHandlers(this)
+    }
+
+    private fun setupUpdateSeekBarTimer() {
+
+        val handler = Handler()
+        val delay = 200L //milliseconds
+
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+
+                sendBroadcast( Intent( Settings.Broadcast_UPDATE_SEEKBAR ) )
+
+                handler.postDelayed(this, delay)
+            }
+        }, delay)
     }
 
     private fun playAudio() {
@@ -101,6 +119,10 @@ class PlayerActivity : AppCompatActivity() {
         registerReceiver(
                 PlayingNewAudioReceiver(this),
                 IntentFilter( Settings.Broadcast_NEW_AUDIO )
+        )
+        registerReceiver(
+                UpdateSeekBarReceiver( this ),
+                IntentFilter( Settings.Broadcast_UPDATE_SEEKBAR )
         )
     }
 

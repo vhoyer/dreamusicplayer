@@ -128,14 +128,14 @@
 				<TextView
 					android:id="@+id/player_elapsedTime"
 					android:layout_gravity="left"
-					android:text="00:00"
+					android:text="0:00"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>
 
 				<TextView
 					android:id="@+id/player_totalTime"
 					android:layout_gravity="right"
-					android:text="00:00"
+					android:text="0:00"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>
 
