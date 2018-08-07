@@ -97,16 +97,11 @@ class PlayerActivity : AppCompatActivity() {
     // Broadcast receiver
     //
 
-    private val PlayingNewAudioReceiver = object : BroadcastReceiver() {
-        override fun onReceive(p0: Context?, p1: Intent?) {
-            //on .PlayingNewAudioReceiver
-            updateLabels()
-        }
-    }
-
     private fun registerReceivers() {
-        val playNewAudio = IntentFilter(Settings.Broadcast_NEW_AUDIO)
-        registerReceiver(PlayingNewAudioReceiver, playNewAudio)
+        registerReceiver(
+                PlayingNewAudioReceiver(this),
+                IntentFilter( Settings.Broadcast_NEW_AUDIO )
+        )
     }
 
     //
